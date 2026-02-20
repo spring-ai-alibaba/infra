@@ -1,0 +1,43 @@
+# Copyright 2024-2025 the original author or authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: "Actbot Action"
+author: "ShyunnY & Spring AI Alibaba Community"
+description: "A robot for handling comment instructions in issues and PRs"
+inputs:
+  token:
+    description: >
+      GitHub token used to create and remove comments. By default, this uses the
+      repository token provided by GitHub Actions. You can customize the user by
+      replacing this token with a user token which has write-access to your
+      repository. Note that the token will be accessible to all repository
+      collaborators.
+    default: ${{ github.token }}
+    required: true
+  dingTalkToken:
+    description: >
+      The DingTalk token used to send messages to a DingTalk group. This is
+      required if you want to send notifications to DingTalk.
+    default: ""
+    required: true
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  env:
+    token: ${{ inputs.token }}
+    dingTalkToken: ${{ inputs.dingTalkToken }}
+
+branding:
+  color: blue
+  icon: cloud
